@@ -1,0 +1,146 @@
+%\input{\fullpath delimiters}
+%\input{\fullpath summations}
+
+% other definitions
+\input{\pathname/A}
+\input{\pathname/abbreviations}
+\input{\pathname/"bold letters"}
+\input{\fullpath/colors}
+\input{\pathname/delimiters}
+\input{\fullpath/ftola}
+\input{\pathname/"least squares"}
+\input{\pathname/"matrix basics"}
+\input{\pathname/norms}
+\input{\pathname/"sigma matrices"}
+\input{\pathname/"svd forms"}
+\input{\pathname/spaces}
+\input{\pathname/vectors}
+
+% stray commands
+\newcommand{\authorTopa}[0]  {\href{mailto:Daniel.M.Topa@erdc.dren.mil}{Daniel Topa}}
+\newcommand{\authorEmbid}[0] {\href{mailto:pfembid@math.unm.edu}{Pedro Embid}}
+\newcommand{\engility}[0]    {Engility Corp.\\USACE Engineer Research and Development Center\\Vicksburg MS}
+
+% http://tex.stackexchange.com/questions/34921/how-to-overlap-images-in-a-beamer-slide
+\def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
+
+
+\newenvironment{myfancyblock}%
+{\begin{center}\begin{tikzpicture}}%
+{\end{tikzpicture}\end{center}}%
+
+\newcommand{\opaqueblock}[4]{
+\node<#1>[#2=#3] (X) {#4};
+}
+
+\newcommand{\onedot}[0]  
+{  
+  \begin{textblock*}{1cm}(1.136\textwidth,8.9cm)%
+   {\color{medgray}{.}}
+  \end{textblock*} 
+}
+
+\newcommand{\twodots}[0]  
+{  
+  \begin{textblock*}{1cm}(1.136\textwidth,8.9cm)%
+   {\color{medgray}{..}}
+  \end{textblock*} 
+}
+
+\newcommand{\donedot}[0]  
+{  
+  \begin{textblock*}{1cm}(1.136\textwidth,8.9cm)%
+   {\color{darkgray}{.}}
+  \end{textblock*} 
+}
+
+\newcommand{\dtwodots}[0]  
+{  
+  \begin{textblock*}{1cm}(1.136\textwidth,8.9cm)%
+   {\color{darkgray}{..}}
+  \end{textblock*} 
+}
+
+\newcommand{\bdoton}[0]  
+{  
+  \begin{textblock*}{1cm}(1.136\textwidth,1.0cm)%
+   {\color{medgray}{.}}
+  \end{textblock*} 
+}
+
+% domains  --   --   --   --   --   --   --   --   --   --   --   --
+\newcommand{\bigL}[0]    { L^{2} }
+\newcommand{\littlel}[0] { l^{2} }
+
+\newcommand{\innerxL}[2] { \langle #1 | #2 \rangle_{\bigL} }
+\newcommand{\innerxl}[2] { \langle #1 | #2 \rangle_{\littlel} }
+
+% action over domains
+\newcommand{\domL}[0]    { \Omega }
+\newcommand{\doml}[0]    { \sigma }
+
+\newcommand{\intcont}[0] { \Omega = \lst{x\in\real{}\colon -1 \le x \le 1} }
+\newcommand{\intdisc}[0] { \sigma = \lst{x\colon -1 \le x \le 1} }
+
+\newcommand{\spaceL}[0]  { \bigL (\Omega) }
+\newcommand{\spacel}[0]  { \littlel \paren{\sigma} }
+
+\newcommand{\intL}[0]    { \bigL[-1,1]}
+\newcommand{\intl}[0]    { \littlel[-1,1] }
+
+\newcommand{\intdom}[1]  { \int_{\domL} #1(x) #1^{*}(x) dx }
+\newcommand{\sumdom}[1]  { \sum_{x\in \doml} #1(x) #1^{*}(x) \Delta }
+
+\newcommand{\intdomx}[2] { \int_{\domL} #1(x) #2^{*}(x) dx }
+\newcommand{\intdomy}[2] { \bl{\int_{\domL}} #1(x) #2^{*}(x) dx }
+
+\newcommand{\sumdomx}[2] { \sum_{x\in \doml} #1(x) #2^{*}(x) \Delta }
+\newcommand{\sumdomy}[2] { \sum_{x\in \doml} #1(x) #2^{*}(x) \Delta }
+\newcommand{\sumdomz}[2] { \bl{\sum_{x\in \doml}} #1(x) #2^{*}(x)\Delta }
+
+%% Derivatives
+\newcommand{\pd}[2]      { \frac{ \partial #1 } { \partial #2 } }
+\newcommand{\pdt}[1]     { \pd{ #1 }{t} }
+\newcommand{\pdx}[1]     { \pd{ #1 }{x} }
+
+\newcommand{\td}[2]      { \frac{ d #1 } { d #2 } }
+\newcommand{\tdt}[1]     { \td{ #1 } { dt } }
+\newcommand{\tdx}[1]     { \td{ #1 } { dx } }
+
+\newcommand{\pz}[0]      { \phantom{-1} }
+\newcommand{\prx}[0]     { \pz 1 }
+\newcommand{\pry}[0]     { \pz 0 }
+
+\newcommand{\phitwo}[0]  {\phi(x_{1}, x_{2})}
+
+%% Title page
+\newcommand{\tpage}[0] 
+{
+\begin{frame}
+  \begin{center}
+    \bl{{\LARGE{Fixing Gauge and Rank Deficiency}}} \\[10pt]
+    {\href{mailto:daniel.m.topa@erdc.dren.mil}{\large{Daniel Topa$^{1,2}$ and \href{http://math.unm.edu/people/academic-personnel/pedro-embid}{Pedro Embid}}$^{1}$}} \\[10pt]
+    %
+    \mg{{\scriptsize{$^{1}$ \href{http://www.math.unm.edu}{University of New Mexico, Department of Mathematics and Statistics}}}}\\[5pt]
+    \mg{{\scriptsize{$^{2}$ \href{http://www.engilitycorp.com}{Engility Corporation}, 
+    \\\href{http://www.usace.army.mil}{USACE} \href{http://www.erdc.usace.army.mil}{Engineer Research and Development Center},
+    \\\href{http://www.erdc.usace.army.mil/Locations/InformationTechnologyLaboratory.aspx}{Information Technology Laboratory}}}}\\[10pt]
+    %
+    %{\normalsize{\href{http://www.siam.org/meetings/la15/}{SIAM Conference on Applied Linear Algebra}}} \\[5pt]
+    \Put(-40,-100){\href{http://www.siam.org/meetings/la15/}{\includegraphics[ height = 2cm ]{../graphics/logos/"logo ala15"}}}
+  \end{center}
+\end{frame}
+}
+
+\endinput  %  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+%\tiny
+%\scriptsize
+%\footnotesize
+%\small
+%\normalsize
+%\large
+%\Large
+%\LARGE
+%\huge
+%\Huge

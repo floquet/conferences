@@ -1,0 +1,94 @@
+% http://stackoverflow.com/questions/3208691/how-to-identify-equation-and-subsection-counters-in-latex
+% \newtheorem{myDefinition}[section]{Definition}
+\newtheorem{myDefinition}{Definition}
+\newtheorem{myTheorem}{Theorem}
+\newtheorem{myLemma}{Lemma}
+
+\numberwithin{equation}{section}
+\numberwithin{myTheorem}{section}
+
+% other definitions
+\input{\fullpath/colors}
+\input{\fullpath/delimiters}
+\input{\fullpath/"matrix basics"}
+\input{\fullpath/norms}
+\input{\fullpath/spaces}
+
+% matrices  --   --   --   --   --   --   --   --   --   --   --   --
+\newcommand{\A}[1]       { \mathbf{A}^{\rm{#1}} }
+\newcommand{\As}[0]      { \mathbf{A}^{\rm{*}} }
+\newcommand{\PP}[0]      { \mathbf{P} }
+\newcommand{\R}[0]       { \mathbf{R} }
+\newcommand{\V}[0]       { \mathbf{V} }
+\newcommand{\I}[1]       { \mathbf{I}_{#1} }
+
+\newcommand{\re}[0]      { \text{Re} }
+\newcommand{\im}[0]      { \text{Im} }
+
+\newcommand{\half}[0]    { \frac{1} {2} }
+
+% domains  --   --   --   --   --   --   --   --   --   --   --   --
+\newcommand{\bigL}[0]    { L^{2} }
+\newcommand{\littlel}[0] { l^{2} }
+
+\newcommand{\innerxL}[2] { \langle #1 | #2 \rangle_{\bigL} }
+\newcommand{\innerxl}[2] { \langle #1 | #2 \rangle_{\littlel} }
+
+% action over domains
+\newcommand{\domL}[0]    { \Omega }
+\newcommand{\doml}[0]    { \sigma }
+
+\newcommand{\intcont}[0] { \Omega = \lst{x\in\real{}\colon -1 \le x \le 1} }
+\newcommand{\intdisc}[0] { \sigma = \lst{x\colon -1 \le x \le 1} }
+
+\newcommand{\spaceL}[0]  { \bigL (\Omega) }
+\newcommand{\spacel}[0]  { \littlel \paren{\sigma} }
+
+\newcommand{\intL}[0]    { \bigL[-1,1]}
+\newcommand{\intl}[0]    { \littlel[-1,1] }
+
+% \newcommand{\intdom}[1]  { \int_{\domL} #1(x) \overline{#1}^{*}(x) dx }
+% \newcommand{\sumdom}[1]  { \sum_{x\in \doml} #1(x) #1^{*}(x) }
+\newcommand{\intdom}[1]  { \int_{\domL}      #1(x) \overline{#1(x)} dx }
+\newcommand{\sumdom}[1]  { \sum_{x\in \doml} #1(x) \overline{#1(x)} }
+
+\newcommand{\intdomx}[2] { \int_{\domL} #1(x) \overline{#2(x)} dx }
+\newcommand{\sumdomx}[2] { \sum_{x\in \doml}  \overline{#2(x)} \Delta }
+
+% epsilon 
+\newcommand{\eps}[0]     {\epsilon}
+\newcommand{\egtz}[0]    {\eps > 0}
+
+% stray commands  --   --   --   --   --   --   --   --   --   --   --   --
+
+\newcommand{\sgn}[0]     { \text{sgn } }
+
+% bound angle
+\newcommand{\dtwo}[0]    { \overline{\dtwoopen} }
+\newcommand{\dtwoopen}[0]{ D_{2} }
+
+% order
+\newcommand{\order}[1]   { \mathcal{o}\paren{#1} }
+\newcommand{\Order}[1]   { \mathcal{O}\paren{#1} }
+
+\newcommand{\mx}[2]      { \max\limits_{#1 \in \cmplx{ #2 }} }
+\newcommand{\mn}[2]      { \min\limits_{#1 \in \cmplx{ #2 }} }
+
+\newcommand{\mxxn}[0]    { \mx{x}{n} }
+\newcommand{\mnxn}[0]    { \mn{x}{n} }
+
+\newcommand{\mxball}[0]  { \max\limits_{\normt{x} = 1} }
+
+% is equal?
+\newcommand{\iseq}[0]    { \overset{?}{=} }
+
+% map A
+\newcommand{\mapa}[1]    { \overset{\A{#1}}{\mapsto} }
+
+% header
+\newcommand{\head}[1]    { $\A{}$ & $=$ & $\U{}$ & $\sig{}$ & $\V{*}$ }
+
+% spacings and such
+\newcommand{\wfour}[0]   {1.05in}
+
+\endinput %-------------------------------
