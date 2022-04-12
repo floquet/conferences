@@ -1,0 +1,93 @@
+\section{Spaces}
+
+Our troubles begin when we move, implicitly, from the continuous space $\bigL$ to the discrete space of $\bigL$. That is when we move from the continuum, the theoretical realm of the chalkboard, to discrete space, the realm of computer calculation. A typical case involves the Legendre polynomials which are orthogonal over the interval $\brac{-1,1}$. In the continuum. But the instant we discretize the space as in measurement or computation, we switch to a discrete topology and sacrifice orthogonality.
+
+To set the stage, we need to define the domains, norms and membership for both topologies. Take an arbitrary interval on the real line, $[a,b]$ where $a<b$. In the continuum we can call this domain $\Omega$ and formally define
+  % % % EQUATION
+  \begin{equation}
+    \Omega = \lst{x\ir\colon a \le x \le b}.
+    \label{eq:domain:L}
+  \end{equation}
+  % % %
+For the discrete case we only have $\doml\in\real{n}$, an denumerable set of $n$ points
+  % % % EQUATION
+  \begin{equation}
+    \doml = \lst{x_{1}, x_{2}, \dots, x_{n}} = \lst{x_{k}}_{k=1}^{n} .
+    \label{eq:domain:l}
+  \end{equation}
+  % % %
+These points are ordered
+  % % % EQUATION
+  \begin{equation}
+    a \le x_{1} \le x_{2} \le \cdots \le x_{n} \le b .
+  \end{equation}
+  % % %
+To measure distance we introduce the natural norms. For continuous topologies $x\in\Omega$ and
+  % % % EQUATION
+  \begin{equation}
+    \norm{F(x)}_{\bigL}^{2} = \intdom{F} .
+    \label{eq:norm:L}
+  \end{equation}
+  % % %
+Integration is in the Lebesgue sense. For discrete topologies $x\in\sigma$ and
+  % % % EQUATION
+  \begin{equation}
+    \norm{f(x)}_{\littlel}^{2} = \sumdom{f} .
+    \label{eq:norm:l}
+  \end{equation}
+  % % %
+These points $\doml$ may form a uniform mesh where $x_{k+1} - x_{k} = \Delta$, $k=1,2,\dots,n$ but this is not necessary.
+For emphasis we will reserve capital letters for examples in the continuum and lower case letters for examples in the discrete spaces.
+
+The collection of all functions which are square integrable is $\spaceL$. A function $F(x)\colon \real{}  \mapsto \cmplx{}$ is an element in this space iff the norm is finite:
+  % % % EQUATION
+  \begin{equation}
+    F(x) \in\spaceL \quad \iff \quad \intdom{F} < \infty.
+    \label{eq:member:L}
+  \end{equation}
+  % % %
+The collection of all functions which are square summable is $\spacel$. A function $f(x)\colon \real{}  \mapsto \cmplx{}$ is an element in this space iff the norm is finite:
+  % % % EQUATION
+  \begin{equation}
+    f(x) \in\spacel \quad \iff \quad \sumdom{f} < \infty.
+    \label{eq:member:l}
+  \end{equation}
+  % % %
+
+With the stage set, we turn to the task at hand: resolving a target function in the bases of a complete and linearly independent set of functions over the domain. Let the highest order in the expansion be $d$ for degree of fit. For the continuum case where $x\in\Omega$
+  % % % EQUATION
+  \begin{equation}
+    F(x) \approx a_{0}G_{0}(x) + a_{1}G_{1}(x) + \cdots + a_{d}G_{d}(x) .
+    \label{eq:approx F}
+  \end{equation}
+  % % %
+In discrete space $x\in\sigma$ we have
+  % % % EQUATION
+  \begin{equation}
+    f(x) \approx b_{0}g_{0}(x) + b_{1}g_{1}(x) + \cdots + b_{d}g_{d}(x) .
+    \label{eq:approx G}
+  \end{equation}
+  % % %
+
+\subsection{\label{subsec:continuum}Continuum}
+The choice of a polynomial basis is driven by the domain.
+
+The Riesz-Fischer theorem\cite[p. 330]{Rudin}
+\newtheorem{theorem}{Theorem}
+\begin{theorem}[Riesz-Fischer]
+Let $\lst{\phi_{n}}$ be orthonormal sequence of functions on $\Omega$ and suppose $\sum \abs{c_{n}}$ converges. Denote the partial sum as
+  % % % EQUATION
+  \begin{equation*}
+    s_{n} = c_{1}\phi_{1} + \cdots + c_{n}\phi_{n} .
+  \end{equation*}
+  % % %
+There there exists a function $F\in\spaceL$ such that $\lst{s_{n}}$ converges to $F$ in $\spaceL$, and such that
+  % % % EQUATION
+  \begin{equation}
+    F = \sum_{n=1}^{\infty} c_{n}\phi_{n}
+  \end{equation}
+  % % %
+almost everywhere.
+\end{theorem}
+
+\endinput %  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -

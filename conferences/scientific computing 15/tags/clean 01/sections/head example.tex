@@ -1,0 +1,163 @@
+\section{Example}
+
+The following example using the \href{http://mathworld.wolfram.com/LegendrePolynomial.html}{Legendre polynomials} illustrates the points of emphasis. These functions are monic polynomials orthogonal over the continuous set $\Omega=\lst{x\colon -1 \le x \le 1}$. Of course they are not orthogonal over the discrete set $\sigma = \lst{x: -1 \le x_{1} \le x_{2} \le \cdots \le x_{mu} \le 1 }$.
+
+
+The polynomials can be defined as the set of functions which solve Legendre's differential equation:
+  % = =  e q u a t i o n
+  \begin{equation}
+    \frac{d}{dx} \paren{1-x^{2}} \frac{d}{dx} P_{n}\paren{x} + n\paren{n+1} P_{n}\paren{x} = 0
+    %\label{eqn:}
+  \end{equation}
+  % = =
+A more direct route to constructing the set is to define $P_{0}(x) = 1$ and $P_{1}(x) = x$ and employ the recursion relationship
+  % = =  e q u a t i o n
+  \begin{equation}
+    P_{n+1}\paren{x} = x P_{n}\paren{x} - \frac{n^{2}} {4n^{2} - 1} P_{n-1}\paren{x}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+  
+  % = =  e q u a t i o n
+  \begin{equation}
+    \mathcal{P}_{n}(x) = x^{n} - \sum_{k=0}^{m-1} \innerx{\mathcal{P}_{k}(x)} {x^{n}}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+$\lst{\mathcal{P}_{n}(x)}_{n=0}^{\infty}$ is a sequence of orthonormal functions while $\lst{P_{n}(x)}_{n=0}^{\infty}$ is a sequence of monic functions.
+
+The parity of the Legendre polynomials is the same as the parity of the index. For example, when $n$ is an odd number $P_{n}(x)$ is odd function.
+  % = =  e q u a t i o n
+  \begin{equation}
+    %\begin{split}
+      P_{n}\paren{-x} =
+      \begin{cases}
+        \phantom{-}P_{n}\paren{x} & n \text{ even} \\
+        -P_{n}\paren{x} & n \text{ odd}
+      \end{cases}
+    %\end{split}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+Definitions. The lowest order Legendre polynomials of even parity
+  % = =  e q u a t i o n
+  \begin{equation}
+    \begin{split}
+      %
+      P_{0}\paren{x} &= 1 \\
+      %
+      P_{2}\paren{x} &= \half \paren{3x^{2} - 1} \\
+      %
+      P_{4}\paren{x} &= \frac{1}{8} \paren{34x^{4} - 30x^{2} + 3x} \\
+      %
+    \end{split}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+  
+The lowest order Legendre polynomials of odd parity
+  % = =  e q u a t i o n
+  \begin{equation}
+    \begin{split}
+      %
+      P_{1}\paren{x} &= x \\
+      %
+      P_{3}\paren{x} &= \half \paren{5x^{3} - 3x} \\
+      %
+      P_{5}\paren{x} &= \frac{1}{8} \paren{63x^{5} - 70x^{3} + 15x} \\
+      %
+    \end{split}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+  % = =  e q u a t i o n
+  \begin{equation}
+    \innerx{P_{n}}{P_{m}} = \frac{2} {2n + 1} \delta_{mn}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+  % = =  e q u a t i o n
+  \begin{equation}
+    a_{n} = \frac{2n + 1} {2} \Delta \sum_{x\in\sigma} f(x) P_{n}\paren{x}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+where $\Delta$ represents a uniform mesh spacing.
+
+Define the set of monomials
+  % = =  e q u a t i o n
+  \begin{equation}
+    M_{5}\paren{x} = \paren{1, x, x^{2}, x^{3}, x^{4}, x^{5}}^{T}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+  % = =  e q u a t i o n
+  \begin{equation}
+    x^{3} = \paren{0, 0, 1, 0, 0, 0} \cdot M_{5}\paren{x}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+The vector $\paren{0, 0, 1, 0, 0, 0}^{T}$ represents the monomial $x^{3}$.
+  % = =  e q u a t i o n
+  \begin{equation}
+    T_{5} = \frac{1}{8}\mat{ccrrrr}{
+     8 & 0 & -4 & 0 & 3 & 0 \\
+     \gzero & 8 & 0 & -12 & 0 & 15 \\
+     \gzero & \gzero & 12 & 0 & -30 & 0 \\
+     \gzero & \gzero & \gzero & 20 & 0 & -70 \\
+     \gzero & \gzero & \gzero & \gzero & 35 & 0 \\
+     \gzero & \gzero & \gzero & \gzero & \gzero & 63 \\
+    }
+    %\label{eqn:}
+  \end{equation}
+  % = =
+This transformation matrix changes the basis for vectors from the Legendre basis to the monomial basis. For example,
+  % = =  e q u a t i o n
+  \begin{equation}
+    T_{5} \mat{c}{0\\0\\0\\1\\0\\0} = \half \mat{r}{0\\-3\\0\\5\\0\\0}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+tells us that the Legendre polynomial $P_{3}\paren{x}$ is the linear combination $-\frac{3}{2}x + \frac{5}{2}x^{2}$.
+The matrix inverse reverses the transformation and changes monomial amplitudes into Legendre amplitudes. For example,
+  % = =  e q u a t i o n
+  \begin{equation}
+    T_{5}^{-1} \mat{c}{0\\0\\1\\0\\0\\0} = \frac{1}{3} \mat{c}{1\\0\\2\\0\\0\\0}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+reveals the monomial $x^{2}$ is the Legendre polynomial combination $\frac{1}{3}P_{0}\paren{x} + \frac{2}{3}P_{2}\paren{x}$.
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[ width = 2.75in ]{graphics/"P even"} 
+   \caption{Lowest order even Legendre polynomials $P_{0}(x)$, $P_{2}(x)$, and $P_{4}(x)$.}
+   \label{fig:P even}
+\end{figure}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[ width = 2.75in ]{graphics/"P odd"} 
+   \caption{Lowest order odd Legendre polynomials $P_{1}(x)$, $P_{3}(x)$, and $P_{5}(x)$.}
+   \label{fig:P odd}
+\end{figure}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[ width = 2.5in ]{graphics/"approx col"} 
+   \caption{Approximation of the signum function.}
+   \label{fig:signum approx}
+\end{figure}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[ width = 3.0in ]{graphics/"legendre error -5"} 
+   \caption{Error in computing the Legendre amplitudes.}
+   \label{fig:legendre error}
+\end{figure}
+
+\endinput %  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -

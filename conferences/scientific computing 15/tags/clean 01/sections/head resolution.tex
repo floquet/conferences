@@ -1,0 +1,280 @@
+\section{Theory}
+
+Leasts squares,  orthogonality, and linear independence
+ 
+\subsection{Least squares in $\bigL$}  %  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++
+Given a domain such as $\domL$ in \eqref{eq:domain:L}, a function $F(x)\in\spaceL$ and a sequence of basis functions $\lst{G_{k}}_{k=0}^{n}\in\spaceL$ the least squares solution $a_{LS}$ in the continuum is cast as
+  % % % EQUATION
+  \begin{multline}
+    a_{LS} = \left\{ a\in\cmplx{n+1} \colon \right. \\
+    \left. \int_{\domL}{ \abs{F(x)-\sum_{k=0}^{n}a_{k} G_{k}(x)}^{2} dx } \text{ is minimized}
+    \right\}.
+    \label{eq:L:lsq}
+  \end{multline}
+  % % %
+The resulting linear system for the normal equations is shown in \ref{eq:L:full}. 
+  % = =  e q u a t i o n
+  \begin{equation}
+    \A{} = \paren{G_{0}\paren{x}, G_{1}\paren{x}, \dots, G_{n}\paren{x}}^{T}
+    %\label{eqn:}
+  \end{equation}
+  % = =The matrix element in row $r$, column $c$ is 
+  % = =  e q u a t i o n
+  \begin{equation}
+    \brac{\As \A{}}_{rc} = \innerx{G_{r-1}} {G_{c-1}}, \qquad 0 \le r, c \le n .
+    %\label{eqn:}
+  \end{equation}
+  % = =
+Given $d_{1}<d_{2}$, $\lst{a_{k}}_{k=0}^{d_{1}} \subseteq \lst{a_{k}}_{k=0}^{d_{2}}$.
+
+%%
+
+%  http://www.latex-community.org/forum/viewtopic.php?f=4&t=3889
+%  http://www.dsm.fordham.edu/~agw/algorithms/LLL/counters/counters1.pdf
+%  http://stackoverflow.com/questions/3208691/how-to-identify-equation-and-subsection-counters-in-latex
+
+%  http://texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf
+%  X.D.1
+\newcounter{MYtempeqncnt}
+\begin{figure*}[!h]
+% ensure that we have normalsize text
+\normalsize
+% Store the current equation number.
+\setcounter{MYtempeqncnt}{\value{equation}}
+% Set the equation number to one less than the one
+% desired for the first equation here.
+% The value here will have to changed if equations
+% are added or removed prior to the place these
+% equations are referenced in the main text.
+\setcounter{equation}{\value{MYtempeqncnt}}
+\begin{equation}
+    \underbrace{\mat{cccc}{
+    \innerx{G_{0}}{G_{0}} & \innerx{G_{0}}{G_{1}} & \cdots & \innerx{G_{0}}{G_{n}} \\
+    \innerx{G_{1}}{G_{0}} & \innerx{G_{1}}{G_{1}} & \cdots & \innerx{G_{1}}{G_{n}} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \innerx{G_{n}}{G_{0}} & \innerx{G_{n}}{G_{1}} & \cdots & \innerx{G_{n}}{G_{n}}
+    }}_{\A{*}\A{}}
+    \mat{c}{ a_{0} \\ a_{1} \\ \vdots \\ a_{n} }
+    =
+%    \mat{c}{ \innerx{G_{0}} {F} \\ \innerx{G_{1}} {F} \\ \vdots \\ \innerx{G_{n}} {F} } ,
+    \underbrace{
+    \mat{c}{ \innerx{G_{0}} {F} \\ \innerx{G_{1}} {F} \\ \vdots \\ \innerx{G_{n}} {F} }
+    }_{\As F} ,
+    \qquad
+    \innerx{G_{j}}{G_{k}} = \intdomx {G_{j}}{G_{k}} .
+    \label{eq:L:full}
+\end{equation}
+% Restore the current equation number.
+\setcounter{equation}{\value{MYtempeqncnt}}
+% IEEE uses as a separator
+\hrulefill
+% The spacer can be tweaked to stop underfull vboxes.
+\vspace*{4pt}
+\end{figure*}
+
+Because the functions $G$ are a linearly independent set the matrix $\As \A{}$ has full rank and is not singular. The least squares solution is
+  % = =  e q u a t i o n
+  \begin{equation}
+    a_{LS} = \paren{\As \A{}}^{-1} \As F
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+%%
+
+  % = =  e q u a t i o n
+  \begin{equation}
+    \innerx{G_{j}}{G_{k}} = c \delta_{j}^{k}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+where $\delta_{j}^{k}$ is the Kronecker delta function.
+
+Normal equations
+  % = =  e q u a t i o n
+  \begin{equation}
+    \A{} a = b
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+  % = =  e q u a t i o n
+  \begin{equation}
+    \A{}_{rc} = \innerx{G_{r}}{G_{c}}, \quad b_{r} = \innerx{F}{G_{r}}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+
+Bolstered by the Reisz-Fischer theorem, we are strongly motivated to look for an orthogonal set of basis functions where the inner products are simplified to
+  % = =  e q u a t i o n
+  \begin{equation}
+    \innerx{G_{j}} {G_{k}} = c_{j} \delta_{jk}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+where $\delta_{jk}$ is the Kronecker delta function. In these cases the linear system decouples and the amplitudes can be solved mode-by-mode.
+  % % % EQUATION
+  \begin{equation}
+    \mat{cccc}{
+    c_{0} & 0 & \cdots & 0 \\
+    0 & c_{1} &  & 0 \\
+    \vdots &   & \ddots &   \\
+    0 & 0 &  & c_{n} \\
+    }
+    \mat{c}{ a_{0} \\ a_{1} \\ \vdots \\ a_{n} }
+    =
+    \mat{c}{ \innerx{F}{G_{0}} \\ \innerx{F}{G_{1}} \\ \vdots \\ \innerx{F}{G_{n}} }
+    \label{eq:L:lite}
+  \end{equation}
+  % % %
+The solution is
+  % % % EQUATION
+  \begin{equation}
+    a_{k} = \frac{\innerx{F}{G_{k}}}{\innerx{G_{k}}{G_{k}}}, \quad k=0,1,2,\dots,n
+  \end{equation}
+  % % %
+
+\subsection{Least squares in $\littlel$}  %  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++
+The discrete least squares problem is written as
+  % % % EQUATION
+  \begin{equation}
+    \min_{b\in\real{n}} \sum_{x\in\doml}{ \abs{f(x)-\sum_{k=1}^{n}b_{k} g_{k}(x)}^{2} dx }
+  \end{equation}
+  % % %
+  % = =  e q u a t i o n
+  \begin{multline}
+    b_{LS} = \left\{ b\in\cmplx{n+1} \colon \right. \\
+    \left. \int_{\domL}{ \abs{f(x)-\sum_{k=0}^{n}b_{k} g_{k}(x)}^{2} dx } \text{ is minimized}
+    \right\}.
+    \label{eq:l:lsq}
+  \end{multline}
+  % = =and generates the linear system for the normal equations shown in \ref{eq:l:full}.
+%%
+
+%  http://texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf
+%  X.D.1
+\begin{figure*}[!t]
+% ensure that we have normalsize text
+\normalsize
+% Store the current equation number.
+\setcounter{MYtempeqncnt}{\value{equation}}
+% Set the equation number to one less than the one
+% desired for the first equation here.
+% The value here will have to changed if equations
+% are added or removed prior to the place these
+% equations are referenced in the main text.
+\setcounter{equation}{\value{MYtempeqncnt}}
+\begin{equation}
+    \mat{cccc}{
+    \innerx{g_{0}}{g_{0}} & \innerx{g_{0}}{g_{1}} & \cdots & \innerx{g_{0}}{g_{n}} \\
+    \innerx{g_{1}}{g_{0}} & \innerx{g_{1}}{g_{1}} & \cdots & \innerx{g_{1}}{g_{n}} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \innerx{g_{n}}{g_{0}} & \innerx{g_{n}}{g_{1}} & \cdots & \innerx{g_{n}}{g_{n}} \\
+    }
+    \mat{c}{ a_{0} \\ a_{1} \\ \vdots \\ a_{n} }
+    =
+    \mat{c}{ \innerx{f}{g_{0}} \\ \innerx{f}{g_{1}} \\ \vdots \\ \innerx{f}{g_{n}} } ,
+    \qquad
+    \innerx{g_{j}}{g_{k}} = \sumdomx {g_{j}}{g_{k}} .
+    \label{eq:l:full}
+\end{equation}
+% Restore the current equation number.
+\setcounter{equation}{\value{MYtempeqncnt}}
+% IEEE uses as a separator
+\hrulefill
+% The spacer can be tweaked to stop underfull vboxes.
+\vspace*{4pt}
+\end{figure*}
+
+%%
+
+Because the basis functions are orthogonal, the linear system decouples are can be solved mode-by-mode.
+  % % % EQUATION
+  \begin{equation}
+    \mat{cccc}{
+    d_{0} & 0 & \cdots & 0 \\
+    0 & d_{1} &  & 0 \\
+    \vdots &   & \ddots &   \\
+    0 & 0 &  & d_{n} \\
+    }
+    \mat{c}{ b_{0} \\ b_{1} \\ \vdots \\ b_{n} }
+    =
+    \mat{c}{ \innerx{f}{g_{0}} \\ \innerx{f}{g_{1}} \\ \vdots \\ \innerx{f}{g_{n}} }
+    \label{eq:l:lite}
+  \end{equation}
+  % % %
+The solution is
+  % % % EQUATION
+  \begin{equation}
+    a_{k} = \frac{\innerx{f}{g_{k}}}{\innerx{g_{k}}{g_{k}}}, \quad k=0,1,2,\dots,d
+  \end{equation}
+  % % %
+To dispel confusion we explicitly show an example of the inner product:
+  % = =  e q u a t i o n
+  \begin{equation}
+    \begin{split}
+      \innerx{f}{g_{k}} &= \sum_{j=1}^{\mu-1} f\paren{x_{j}} g^{k}\paren{x_{j}} \Delta_{j} .
+    \end{split}
+    %\label{eqn:}
+  \end{equation}
+  % = =
+Here the interval length is $\Delta_{j} = x_{j+1} - x_{j}$.
+
+The linear system of normal equations in \eqref{eq:l:full} is effectively diagonalized.
+
+\subsection{Linear independence}  %  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++
+Trouble occurs when one makes the assumption that functions orthogonal in $\domL$ are also orthogonal in $\doml$; this is seldom true. As an example, the Legendre functions are orthogonal in the continuum but are not orthogonal when sampled discretely.
+
+An example will clarify the solution. Start with the interval $\domL = \brac{-1,1}$ and a partition represented by the set of $\mu$ points $\doml = \lst{x_{1},\dots,x_{\mu}}\subset\Omega$. For the basis functions we will consider the monomials and the Legendre polynomials. 
+We have two different Hilbert space spans, one for the monomials $S_{m}$, the other for the Legendre polynomials $S_{P}$:
+%%
+
+%  http://texdoc.net/texmf-dist/doc/latex/IEEEtran/IEEEtran_HOWTO.pdf
+%  X.D.1
+\begin{figure*}[!t]
+% ensure that we have normalsize text
+\normalsize
+% Store the current equation number.
+\setcounter{MYtempeqncnt}{\value{equation}}
+% Set the equation number to one less than the one
+% desired for the first equation here.
+% The value here will have to changed if equations
+% are added or removed prior to the place these
+% equations are referenced in the main text.
+\setcounter{equation}{\value{MYtempeqncnt}}
+\begin{equation}
+    S_{m} = \spn{
+      \mat{c}{ 1 \\ 0 \\ 0 \\ \vdots \\ 0 },
+      \mat{c}{ 0 \\ x \\ 0 \\ \vdots \\ 0 },
+        \dots,
+      \mat{c}{ 0 \\ 0 \\ 0 \\ \vdots \\ x^{n} } } , \quad
+    %
+    S_{P} = \spn{
+      \mat{c}{ P_{0}(x) \\ 0 \\ 0 \\ \vdots \\ 0 },
+      \mat{c}{ 0 \\ P_{1}(x) \\ 0 \\ \vdots \\ 0 },
+        \dots,
+      \mat{c}{ 0 \\ 0 \\ 0 \\ \vdots \\ P_{n}(x) } }
+    \label{eq:spans}
+\end{equation}
+% Restore the current equation number.
+\setcounter{equation}{\value{MYtempeqncnt}}
+% IEEE uses as a separator
+\hrulefill
+% The spacer can be tweaked to stop underfull vboxes.
+\vspace*{4pt}
+\end{figure*}
+
+%%
+In the limit $n\to\infty$, both spans are complete. Both spans are linearly independent. The span $S_{P}$ is orthogonal over $\domL$, neither span is orthogonal over $\domL$ and $\doml$.
+
+\subsection{Infinity insurance}  %  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++
+
+\subsection{Observation}  %  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++  ++
+Consider the interval $\domL = \brac{-\pi,\pi}$ and the discrete set of $N+1$ points uniformly sampled points:
+$$\doml = \lst{-\pi,-\pi+\Delta,\dots,\pi-\Delta,\pi}$$
+where $\Delta = 2\pi / N$. There are exactly three functions which are orthogonal over both $\domL$ and $\doml$: $\sin x$, $\cos x$, and their linear combination $e^{ix}$. This important point is typically emphasized in texts on mathematical physics (Arfken) or Fourier analysis. If the discrete set is not sampled uniformly, the discrete orthogonality is lost. 
+
+So perhaps many practitioners, lulled by the ubiquity of the discrete and continuous Fourier transforms, erroneously take innocent functions like the Legendre polynomials and discretize them without regard. But only the sine and cosine functions share this wonderful property. This fact explains why there is no such creature as a discrete Legendre transform or a discrete polynomial transform.
+
+
+\endinput %  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
